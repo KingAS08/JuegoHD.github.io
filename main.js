@@ -1,11 +1,12 @@
+
 const questions = [
     {
       question: "¿Qué es una habilidad digital?",
       answers: [
-        { text: "Es una habilidad para usar herramientas digitales", correct: true },
-        { text: "Es una habilidad física", correct: false },
-        { text: "Es una habilidad deportiva", correct: false },
-        { text: "Es una habilidad artística", correct: false }
+        { text: "Es una habilidad para el desarrollo tecnologico", correct: true },
+        { text: "Es una habilidad para el desarrollo físico", correct: false },
+        { text: "Es una habilidad para el desarrollo deportivo", correct: false },
+        { text: "Es una habilidad para el desarrollo artístico", correct: false }
       ]
     },
     {
@@ -25,7 +26,35 @@ const questions = [
         { text: "Linux", correct: false },
         { text: "Word", correct: false }
       ]
-    }
+    },
+    {
+        question: "¿Qué es el diseño responsivo?",
+        answers: [
+          { text: "Diseño que se adapta a diferentes tamaños de pantalla", correct: true },
+          { text: "Diseño solo para computadoras de escritorio", correct: false },
+          { text: "Diseño que no cambia en ningún dispositivo", correct: false },
+          { text: "Diseño para aplicaciones móviles", correct: false }
+        ]
+      },
+      {
+        question: "¿Cuál de estas es una plataforma de programación en línea?",
+        answers: [
+          { text: "GitHub", correct: false },
+          { text: "CodePen", correct: true },
+          { text: "WordPress", correct: false },
+          { text: "PowerPoint", correct: false }
+        ]
+      },
+      {
+        question: "¿Qué lenguaje se utiliza para crear sitios web interactivos?",
+        answers: [
+          { text: "HTML", correct: false },
+          { text: "JavaScript", correct: true },
+          { text: "CSS", correct: false },
+          { text: "SQL", correct: false }
+        ]
+      }
+      
   ];
   
   let currentQuestionIndex = 0;
@@ -46,10 +75,12 @@ const questions = [
     resetState();
     const currentQuestion = questions[currentQuestionIndex];
     questionElement.innerText = currentQuestion.question;
-    currentQuestion.answers.forEach(answer => {
+  
+    currentQuestion.answers.forEach((answer, index) => {
       const button = document.createElement('button');
       button.innerText = answer.text;
       button.classList.add('btn');
+      button.classList.add(`btn-${index + 1}`);  // Asignamos una clase de color única
       if (answer.correct) {
         button.dataset.correct = answer.correct;
       }
@@ -57,6 +88,7 @@ const questions = [
       answerButtonsElement.appendChild(button);
     });
   }
+  
   
   function resetState() {
     while (answerButtonsElement.firstChild) {
@@ -90,14 +122,14 @@ const questions = [
       } else {
         showFinalScore();
       }
-    }, 1000); // Espera 1 segundo para mostrar la siguiente pregunta
+    }, 2000); // Espera 1 segundo para mostrar la siguiente pregunta
   }
   
   function showFinalScore() {
     questionElement.innerText = "Juego terminado. ¡Gracias por participar!";
     answerButtonsElement.innerHTML = '';
     const finalScoreMessage = document.createElement('p');
-    finalScoreMessage.innerText = `Tu puntuación final es: ${score}`;
+    finalScoreMessage.innerText = `Tu puntuación final es: ${score} puntos`;
     finalScoreMessage.classList.add('final-score');
     answerButtonsElement.appendChild(finalScoreMessage);
   }
