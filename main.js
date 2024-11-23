@@ -136,3 +136,30 @@ const questions = [
   
   startGame();
   
+  function showFinalScore() {
+    questionElement.innerText = "Juego terminado. ¡Gracias por participar!";
+    answerButtonsElement.innerHTML = '';
+    
+    // Función para convertir los puntos a calificación
+    const finalGrade = getGrade(score);
+    
+    const finalScoreMessage = document.createElement('p');
+    finalScoreMessage.innerText = `Has sacado: ${finalGrade} de calificación`;
+    finalScoreMessage.classList.add('final-score');
+    answerButtonsElement.appendChild(finalScoreMessage);
+  }
+  
+  function getGrade(points) {
+    if (points >= 0 && points <= 15) {
+      return 5;
+    } else if (points >= 16 && points <= 30) {
+      return 6;
+    } else if (points >= 31 && points <= 45) {
+      return 8;
+    } else if (points >= 46 && points <= 60) {
+      return 10;
+    } else {
+      return 5;
+    }
+  }
+  
